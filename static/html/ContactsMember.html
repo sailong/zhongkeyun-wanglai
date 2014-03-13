@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta content="telephone=no" name="format-detection" />
+	<title>往来</title>
+	<link rel="stylesheet" href="css/wanglai.css" />
+	<script src="js/wanglai.js"></script>
+</head>
+<body>
+	<menu id="menu">
+		<li class="tit">微名片</li>
+		<li><a href="#">我的名片</a></li>
+		<li><a href="#">名片二维码</a></li>
+		<li><a href="#">修改名片</a></li>
+		<li class="tit">微人脉</li>
+		<li><a href="#">名片夹</a></li>
+		<li><a href="#">排行榜</a></li>
+		<li><a href="#">谁看过我</a></li>
+		<li class="tit">微活动</li>
+		<li><a href="#">全部活动</a></li>
+		<li><a href="#">我发起的</a></li>
+		<li><a href="#">我参与的</a></li>
+		<li class="cur"><a href="#">发起活动</a></li>
+		<li><a href="#">送贺卡</a></li>
+	</menu>
+	<header id="header">
+		<h1>内部通讯录</h1>
+		<span class="mbtn">菜单</span>
+		<span class="hbtn">编辑</span>
+	</header>
+	<div id="content">
+		<section class="adrinfo">
+			<p>这里都是内部的所有人的联系方式，各位成员请务必注意保密哈~</p>
+			<p class="p1"><span>人数：234</span><span>类型：互联网</span><span>性质：私密</span></p>
+		</section>
+		<div class="searchbox">
+			<input type="text" class="sinp" placeholder="输入要搜索的关键字" required /><input type="submit" value="搜索" class="sbtn" />
+		</div>
+		<ul class="adrlist adrmemberlist">
+			<li class="rbtn" data-uid="2" data-ustype="0" data-name="正版强盗" data-tel="1593049405" data-address="北京市朝阳区朝外大街保罗大厦7层" data-job="UE用户体验" data-company="中科云健康科技(北京)有限公司">
+				<img src="images/i.png" alt="" class="upic" />
+				<p class="p1">正版强盗<span class="sponsor">发起人</span></p>
+				<p class="p2">电话：<em>1593049405</em></p>
+			</li>
+			<li class="rbtn" data-uid="3" data-ustype="1" data-name="正版强盗" data-tel="1593049405" data-address="北京市朝阳区朝外大街保罗大厦7层" data-job="CEO" data-company="中科云健康科技(北京)有限公司">
+				<img src="images/i.png" alt="" class="upic" />
+				<p class="p1">正版强盗</p>
+				<p class="p2">电话：<em>1593049405</em></p>
+			</li>
+			<li class="rbtn" data-uid="4" data-ustype="2" data-name="正版强盗" data-tel="1593049405" data-address="北京市朝阳区朝外大街保罗大厦7层" data-job="CEO" data-company="中科云健康科技(北京)有限公司">
+				<img src="images/i.png" alt="" class="upic" />
+				<p class="p1">正版强盗</p>
+				<p class="p2">电话：<em>1593049405</em></p>
+			</li>
+			<li class="rbtn" data-name="正版强盗" data-tel="1593049405" data-address="北京市朝阳区朝外大街保罗大厦7层" data-job="CEO" data-company="中科云健康科技(北京)有限公司">
+				<img src="images/i.png" alt="" class="upic" />
+				<p class="p1">正版强盗</p>
+				<p class="p2">电话：<em>1593049405</em></p>
+			</li>
+			<li class="rbtn" data-name="正版强盗" data-tel="1593049405" data-address="北京市朝阳区朝外大街保罗大厦7层" data-job="CEO" data-company="中科云健康科技(北京)有限公司">
+				<img src="images/i.png" alt="" class="upic" />
+				<p class="p1">正版强盗</p>
+				<p class="p2">电话：<em>1593049405</em></p>
+			</li>
+			<li class="rbtn" data-name="正版强盗" data-tel="1593049405" data-address="北京市朝阳区朝外大街保罗大厦7层" data-job="CEO" data-company="中科云健康科技(北京)有限公司">
+				<img src="images/i.png" alt="" class="upic" />
+				<p class="p1">正版强盗</p>
+				<p class="p2">电话：<em>1593049405</em></p>
+			</li>
+			<li class="rbtn" data-name="正版强盗" data-tel="1593049405" data-address="北京市朝阳区朝外大街保罗大厦7层" data-job="CEO" data-company="中科云健康科技(北京)有限公司">
+				<img src="images/i.png" alt="" class="upic" />
+				<p class="p1">正版强盗</p>
+				<p class="p2">电话：<em>1593049405</em></p>
+			</li>
+		</ul>
+		<a href="javascript:;" class="btn_b1 wait">等待创建人正版强盗审核</a>
+		<a href="#" class="btn_b1">我要加入</a>
+		<a href="#" class="btn_b2">我也要创建通讯录</a>
+	</div>
+	<section id="ucardinfo">
+		<div class="close"><span class="cx">X</span></div>
+		<ul>
+			<li><span class="stit">姓名：</span><em id="j_name"></em></li>
+			<li><span class="stit">职位：</span><em id="j_job"></em></li>
+			<li><span class="stit">公司：</span><em id="j_company"></em></li>
+			<li><span class="stit">地址：</span><em id="j_address"></em></li>
+			<li><span class="stit">手机：</span><a href="tel:13800138000" id="j_tel"></a></li>
+		</ul>
+		<a href="#" class="btn_b1">查看他的微名片</a>
+		<a href="#" class="btn_b1">移出该通讯录</a>
+		<a href="#" class="btn_b1">+ 关注</a>
+		<a href="#" class="btn_b1">退出该通讯录</a>
+	</section>
+	
+	<footer id="footer">
+		<a href="javascript:window.history.go(-1);" class="goback">返回</a>
+		<a href="javascript:window.location.reload();" class="refresh">刷新</a>
+	</footer>
+	
+</body>
+</html>

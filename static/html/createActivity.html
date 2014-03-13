@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>往来</title>
+	<link rel="stylesheet" href="css/wanglai.css" />
+	<script src="js/wanglai.js"></script>
+	<link href="css/mobiscroll.custom-2.6.2.min.css" rel="stylesheet" type="text/css" />
+	<script src="js/mobiscroll.custom-2.6.2.min.js" type="text/javascript"></script>
+</head>
+<body>
+	<menu id="menu">
+		<li class="tit">微名片</li>
+		<li><a href="#">我的名片</a></li>
+		<li><a href="#">名片二维码</a></li>
+		<li><a href="#">修改名片</a></li>
+		<li class="tit">微人脉</li>
+		<li><a href="#">名片夹</a></li>
+		<li><a href="#">排行榜</a></li>
+		<li><a href="#">谁看过我</a></li>
+		<li class="tit">微活动</li>
+		<li><a href="#">全部活动</a></li>
+		<li><a href="#">我发起的</a></li>
+		<li><a href="#">我参与的</a></li>
+		<li class="cur"><a href="#">发起活动</a></li>
+		<li><a href="#">送贺卡</a></li>
+	</menu>
+	<header id="header">
+		<h1>发起活动</h1>
+		<span class="mbtn">菜单</span>
+	</header>
+	<div id="content">
+		<form action="#" id="form1" class="formstyle">
+			<div class="formitems">
+				<label for="title">活动标题：</label>
+				<input type="text" name="title" id="title" value="" class="inp" placeholder="请输入活动标题" required="required" />
+			</div>
+			<div class="formitems">
+				<label for="introduction">活动介绍：</label>
+				<textarea cols="40" rows="6" name="detail" id="introduction" class="inp" placeholder="请输入活动介绍" required="required"></textarea>
+			</div>
+			<div class="formitems">
+				<label for="provice">举办地点：</label>
+				<div class="s-city">
+					<input type="hidden" name="current_province" value="">
+					<div class="selectit">
+						请选择省份
+					</div>
+					<select name="province" id="provice" required="required" class="sel">
+						<option value="-1">请选择省份</option>
+				　         </select>
+				</div>
+				<div class="s-city">
+					<input type="hidden" name="current_area" value="">
+					<div class="selectit">
+						请选择城市
+					</div>
+					<select name="area" id="city" required="required" class="sel">
+						<option value="-1">请选择城市</option>
+				　        </select>
+				</div>
+			</div>
+			<div class="formitems">
+				<label for="starttime">活动开始时间：</label>
+				<input type="text" name="begin_time" id="starttime" value="" class="inp" placeholder="请输入活动开始时间" required="required" />
+			</div>
+			<div class="formitems">
+				<label for="endtime">活动结束时间：</label>
+				<input type="text" name="end_time" id="endtime" value="" class="inp" placeholder="请输入活动结束时间" required="required" />
+			</div>
+			<div class="formitems fix">
+				<p>活动属性:</p>
+				<div class="lab1 lab radio" data-val="1">公开</div>
+				<div class="lab1 lab2 radio" data-val="2">私密</div>
+				<input type="hidden" name="verify" id="verify" value="1" />
+			</div>
+			<div class="formitems">
+				<input type="submit" value="发布活动" class="submitbtn" />
+			</div>
+		</form>
+	</div>
+	<script>
+		$(function(){
+			var opt = {
+			        preset: 'date', //日期
+			        theme: 'android-ics light', //皮肤样式
+			        display: 'modal', //显示方式 
+			        mode: 'scroller', //日期选择模式
+			        dateFormat: 'yy-mm-dd', // 日期格式
+			        setText: '确定', //确认按钮名称
+			        cancelText: '取消',//取消按钮名籍我
+			        dateOrder: 'yymmdd', //面板中日期排列格式
+			        dayText: '日', monthText: '月', yearText: '年', //面板中年月日文字
+			        endYear:2020 //结束年份
+		    };
+			$('#starttime,#endtime').mobiscroll(opt);
+		})
+	</script>
+	
+</body>
+</html>

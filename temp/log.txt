@@ -1,0 +1,13 @@
+2013-11-07 10:40:51  127.0.0.1  请求接口： http://www.lw.com/index.php?r=Card/Share&id=18457&sign=af11aa01ca8cdf46d185b70794119e06 发送参数：id=18457&sign=af11aa01ca8cdf46d185b70794119e06
+2013-11-07 10:46:44  127.0.0.1  请求接口： http://www.lw.com/index.php?r=Card/view 发送参数：
+2013-11-07 10:47:05  127.0.0.1  请求接口： http://www.lw.com/index.php?r=card/create 发送参数：
+2013-11-07 10:47:09  127.0.0.1  请求接口： http://www.lw.com/index.php?r=card/view&view_openid=temp_wanglai_f7910d81d506c79103c41d1409f63ee8&showall=1 发送参数：view_openid=temp_wanglai_f7910d81d506c79103c41d1409f63ee8&showall=1
+2013-11-07 10:54:35  127.0.0.1  请求接口： http://www.lw.com/index.php?r=manage&id=18457&sign=c97fa3fbf7447088d8a3ed181c09a1da 发送参数：id=18457&sign=c97fa3fbf7447088d8a3ed181c09a1da
+2013-11-07 10:54:56  127.0.0.1  请求接口： http://www.lw.com/index.php?r=manage/MyPartner&id=18457&sign=1c69b871aa4b32892723772997884281 发送参数：id=18457&sign=1c69b871aa4b32892723772997884281
+2013-11-07 11:01:54  127.0.0.1  请求接口： http://www.lw.com/index.php?r=Card/Share&id=18457&sign=af11aa01ca8cdf46d185b70794119e06 发送参数：id=18457&sign=af11aa01ca8cdf46d185b70794119e06
+2013-11-07 11:18:49  127.0.0.1  请求接口： http://www.lw.com/index.php?r=card/create 发送参数：
+2013-11-07 11:18:52  127.0.0.1  请求接口： http://www.lw.com/index.php?r=card/view&view_openid=temp_wanglai_f7910d81d506c79103c41d1409f63ee8&showall=1 发送参数：view_openid=temp_wanglai_f7910d81d506c79103c41d1409f63ee8&showall=1
+2013-11-07 11:19:01  127.0.0.1  请求接口： http://www.lw.com/index.php?r=manage&id=18457&sign=c97fa3fbf7447088d8a3ed181c09a1da 发送参数：id=18457&sign=c97fa3fbf7447088d8a3ed181c09a1da
+2013-11-07 11:19:04  127.0.0.1  请求接口： http://www.lw.com/index.php?r=card/update&openid=temp_wanglai_f7910d81d506c79103c41d1409f63ee8 发送参数：openid=temp_wanglai_f7910d81d506c79103c41d1409f63ee8
+2013-11-07 11:19:17  127.0.0.1  请求接口： http://www.lw.com/index.php?r=card/updateDo 发送参数：weixin_openid=temp_wanglai_f7910d81d506c79103c41d1409f63ee8&id=18457&from_uid=&name=55555&mobile=13933686894&email=zhoujianjudddddn307@163.com&password=&position=&company=&address=&company_url=&main_business=&supply=&demand=&weixin=&yixin=&laiwang=&qq=&social_position=&profile=&hobby=&avatar=
+2013-11-07 11:19:17  127.0.0.1  请求接口： http://www.lw.com/index.php?r=card/share&id=18457&sign=af11aa01ca8cdf46d185b70794119e06 发送参数：id=18457&sign=af11aa01ca8cdf46d185b70794119e06

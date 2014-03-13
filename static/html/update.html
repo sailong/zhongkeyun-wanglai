@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>往来</title>
+	<link rel="stylesheet" href="css/wanglai.css" />
+	<script src="js/wanglai.js"></script>
+	<link href="css/mobiscroll.custom-2.6.2.min.css" rel="stylesheet" type="text/css" />
+	<script src="js/mobiscroll.custom-2.6.2.min.js" type="text/javascript"></script>
+</head>
+<body>
+	<menu id="menu">
+		<li class="tit">微名片</li>
+		<li><a href="#">我的名片</a></li>
+		<li><a href="#">名片二维码</a></li>
+		<li><a href="#">修改名片</a></li>
+		<li class="tit">微人脉</li>
+		<li><a href="#">名片夹</a></li>
+		<li><a href="#">排行榜</a></li>
+		<li><a href="#">谁看过我</a></li>
+		<li class="tit">微活动</li>
+		<li><a href="#">全部活动</a></li>
+		<li><a href="#">我发起的</a></li>
+		<li><a href="#">我参与的</a></li>
+		<li class="cur"><a href="#">发起活动</a></li>
+		<li><a href="#">送贺卡</a></li>
+	</menu>
+	<header id="header">
+		<h1>创建微名片</h1>
+		<span class="mbtn">菜单</span>
+	</header>
+	<div id="content">
+		<form action="#" id="form1" class="formstyle">
+			<div class="formitems">
+				<p class="htit">
+					<span>基本信息</span>
+				</p>
+				<input type="text" name="member[name]" placeholder="姓名【必填】"  value="" class="inp"required="required" />
+				<input type="text" name="member[mobile]" placeholder="手机【必填】" value="" class="inp" required="required" />
+				<div class="lab1 checkbtn" data-val="1">隐藏名片手机号码</div><input type="hidden" name="member[show_item][mobile]" />
+				<input type="email" name="member[email]" placeholder="邮箱(选填)" value="" class="inp" />
+				<input type="text" id="birthday" name="member[birthday]" placeholder="生日(选填)" value="" class="inp" />
+				<input type="text" name="member[position]" placeholder="职位(选填)" value="" class="inp" />
+				<input type="text" name="member[company]" placeholder="公司(选填)" value="" class="inp" />
+				<textarea cols="40" rows="2" name="member[address]" class="inp" placeholder="地址(选填)"></textarea>
+				<span id="showitems" class="btn_b4">展开填写更多详细信息</span>
+			</div>
+			<div class="formitems" style="display: none" id="itemshide">
+				<p class="htit">
+					<span>详细信息</span>
+				</p>
+				<input type="text" name="member[company_url]" placeholder="公司微站(选填)" value="" class="inp" />
+				<input type="text" name="member[company_url]" placeholder="公司微站(选填)" value="" class="inp" />
+				<textarea cols="40" rows="2" name="member[main_business]" class="inp" placeholder="业务介绍(选填)"></textarea>
+				<textarea cols="40" rows="2" name="member[supply]" class="inp" placeholder="供给(选填)"></textarea>
+				<div class="lab1 checkbtn" data-val="1">隐藏名片供给信息</div><input type="hidden" name="member[show_item][supply]" />
+				<textarea cols="40" rows="2" name="member[demand]" class="inp" placeholder="需求(选填)"></textarea>
+				<div class="lab1 checkbtn" data-val="1">隐藏名片需求信息</div><input type="hidden" name="member[show_item][demand]" />
+				<input type="text" name="member[weixin]" placeholder="微信号(选填)" value="" class="inp" />
+				<input type="text" name="member[yixin]" placeholder="易信号(选填)" value="" class="inp" />
+				<input type="text" name="member[laiwang]" placeholder="来往号(选填)" value="" class="inp" />
+				<input type="text" name="member[qq]" placeholder="QQ号(选填)" value="" class="inp" />
+				<input type="text" name="member[social_position]" placeholder="社会职务(选填)" value="" class="inp" />
+				<textarea cols="40" rows="2" name="member[profile]" class="inp" placeholder="个人简介(选填)"></textarea>
+				<textarea cols="40" rows="2" name="member[hobby]" class="inp" placeholder="兴趣爱好(选填)"></textarea>
+			</div>
+			<div class="formitems">
+				<input type="submit" value="保存设置" class="submitbtn" />
+			</div>
+		</form>
+	</div>
+	
+	<footer id="footer">
+		<a href="javascript:window.history.go(-1);" class="goback">返回</a>
+		<a href="javascript:window.location.reload();" class="refresh">刷新</a>
+	</footer>
+	<script>
+		$(function(){
+			$(".checkbtn").hammer().on("tap",function(){
+				$(this).toggleClass('lab');
+			});
+			
+			$("#showitems").hammer().on("tap",function(){
+				$(this).hide();
+				$("#itemshide").show();
+			})
+			
+			var opt = {
+			        preset: 'date', //日期
+			        theme: 'android-ics light', //皮肤样式
+			        display: 'modal', //显示方式 
+			        mode: 'scroller', //日期选择模式
+			        dateFormat: 'yy-mm-dd', // 日期格式
+			        setText: '确定', //确认按钮名称
+			        cancelText: '取消',//取消按钮名籍我
+			        dateOrder: 'yymmdd', //面板中日期排列格式
+			        dayText: '日', monthText: '月', yearText: '年', //面板中年月日文字
+			        endYear:2020 //结束年份
+		    };
+			$('#birthday').mobiscroll(opt);
+			
+		})
+	</script>
+	
+</body>
+</html>

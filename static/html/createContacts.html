@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>往来</title>
+	<link rel="stylesheet" href="css/wanglai.css" />
+	<script src="js/wanglai.js"></script>
+</head>
+<body>
+	<menu id="menu">
+		<li class="tit">微名片</li>
+		<li><a href="#">我的名片</a></li>
+		<li><a href="#">名片二维码</a></li>
+		<li><a href="#">修改名片</a></li>
+		<li class="tit">微人脉</li>
+		<li><a href="#">名片夹</a></li>
+		<li><a href="#">排行榜</a></li>
+		<li><a href="#">谁看过我</a></li>
+		<li class="tit">微活动</li>
+		<li><a href="#">全部活动</a></li>
+		<li><a href="#">我发起的</a></li>
+		<li><a href="#">我参与的</a></li>
+		<li class="cur"><a href="#">发起活动</a></li>
+		<li><a href="#">送贺卡</a></li>
+	</menu>
+	<header id="header">
+		<h1>发起新的群通讯录</h1>
+		<span class="mbtn">菜单</span>
+	</header>
+	<div id="content">
+		<form action="#" id="form1" class="formstyle">
+			<div class="formitems">
+				<label for="title">名称：</label>
+				<input type="text" name="title" id="title" value="" class="inp" placeholder="请输入标题(必填)" required="required" />
+			</div>
+			<div class="formitems">
+				<label for="introduction">通讯录介绍：</label>
+				<textarea cols="40" rows="6" name="detail" id="introduction" class="inp" placeholder="请输入说明(选填)" required="required"></textarea>
+			</div>
+			<div class="formitems">
+				<label for="provice">通讯录类型：</label>
+				<div class="s-city">
+					<input type="hidden" name="current_province" value="">
+					<div class="selectit">
+						通讯录
+					</div>
+					<select name="province" id="provice" required="required" class="sel">
+						<option value="-1">通讯录</option>
+						<option value="1">兴趣爱好</option>
+				　         </select>
+				</div>
+			</div>
+			<div class="formitems">
+				<label for="provice">隐私保护：</label>
+				<div class="s-city">
+					<input type="hidden" name="current_province" value="">
+					<div class="selectit">
+						公开，群友可见
+					</div>
+					<select name="province" id="provice" required="required" class="sel">
+						<option value="-1">公开，群友可见</option>
+						<option value="1">私密，凭密码可见</option>
+				　         </select>
+				</div>
+			</div>
+			<div class="formitems">
+				<input type="submit" value="发起通讯录" class="submitbtn" />
+			</div>
+		</form>
+	</div>
+	
+</body>
+</html>
