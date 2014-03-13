@@ -48,30 +48,16 @@ class SendmailController extends AdminController
 	}
 	
 	public function actionMailDetail($id){
-	    $dataProvider = new CActiveDataProvider('Sendmail',
-	            array(
-	                    'criteria' => array(
-	                            'order' => 'id DESC',
-	                            'condition' => 'id = '.$id,
-	                    ),
-	                    'pagination' => array(
-	                            'pageSize' => 10
-	                    ),
-	            )
-	    );
-	    $data = array('dataProvider'=>$dataProvider);
-	   /*  //获取用户姓名
-	    $result  = $dataProvider->getData();
-	    if($result)
-	    {
-	        $midArr = array();
-	        foreach ($result as $r)
-	        {
-	            $midArr[] = $r->member_id;
-	        }
-	        $data['memberArr'] = Member::model()->getMemberList($midArr,array('name','avatar'),'array');
-	    } */
-	    $this->render('view',$data);
+	    $sendmail=new Sendmail;  
+			
+		$mail_info=Sendmail::model()->find(array(
+			'select'=>'*',
+			'condition'=>'id=:id',
+			'params'=>array(':id'=>$id),
+		));
+		$data['info'] = $mail_info;
+		$data['type'] = array(0 => '',1=> '所有会员',2=>'所有通讯录的发起人',3=>'某个通讯录的所有成员');
+	    $this->render('mailinfo',$data);
 	}
 	
     /**
@@ -231,7 +217,7 @@ class SendmailController extends AdminController
 		$limit = 1000;
 		$mail_arr = array();
 		$page = 1;
-		
+		$num = 0;
 		while($flag){
 			$offset = ($page-1)*$limit;
 			$sql_tmp = $sql." limit {$offset},{$limit}";
@@ -251,6 +237,9 @@ class SendmailController extends AdminController
 				}
 				$this->addSendMailListBatch($send_arr_list);
 				$mail_arr = array_flip(array_flip($mail_arr));
+				echo count($mail_arr).'</br>';
+				$num+=count($mail_arr);
+				unset($mail_arr,$send_arr,$send_arr_list);
 				//Util::sendMail($mail_arr, $title, $content);
 			}else{ 
 				$flag=false;
@@ -258,7 +247,7 @@ class SendmailController extends AdminController
 			$page+=1;
 			sleep(1);
 		}
-		
+		echo $num;
 		return true;
 	}
 	
