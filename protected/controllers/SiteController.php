@@ -87,6 +87,7 @@ class SiteController extends FrontController
 	 */
 	public function actionLogout()
 	{
+		setcookie('openid','',time()-3600);
 		Yii::app()->user->logout();  //活动相关的用到
 		$this->redirect('/');
 	}

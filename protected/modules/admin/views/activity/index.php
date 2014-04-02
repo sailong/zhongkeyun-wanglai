@@ -49,6 +49,7 @@
 												  <a href="'.$this->createUrl('update', array('id'=>$row['id'])).'">修改</a>
 												  <a href="javascript:;" class="delete_data" data_id="'.$row['id'].'" url="'.$this->createUrl('delete',array("id"=>$row['id'])).'" notice="">删除</a>
 								   				  <a href="'.$this->createUrl('viewJoiners', array('id'=>$row['id'])).'">查看报名</a>
+												  <a href="'.$this->createUrl('apply', array('id'=>$row['id'])).'">代报名</a>
 										
 										
 												<a href="'.$this->createUrl('extra/index',array('id'=>$row['id'],'type'=>Extra::TYPE_ACTIVITY_EMAIL)).'">管理邮箱</a></td>';

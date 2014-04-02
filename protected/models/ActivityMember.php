@@ -68,6 +68,7 @@ class ActivityMember extends CActiveRecord
 			// 已报名用户
 			'applied' => array(
 				'condition' => 'canceled='.self::CANCELED_NO.' AND (state='.self::VERIFY_STATE_PASS.' OR state='.self::VERIFY_STATE_WITHOUT.')',
+				'order' => 'create_time DESC'
 			),
 			// 正在申请中的
 			'applying' => array(

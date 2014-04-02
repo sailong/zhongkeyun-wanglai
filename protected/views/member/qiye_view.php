@@ -57,7 +57,7 @@
 		</div>
 		<menu class="carddetail">
 			<li class="ny"><em class="wlnum">企业往来号：</em><strong><?php echo $model->wanglai_number; ?></strong></li>
-			<li class="nz"><em class="mobile">企业客服电话：</em><a href="tel:<?php echo $model->mobile ?>"><?php echo $model->mobile; ?></a></li>
+			<?php if(!empty($model->mobile)):?><li class="nz"><em class="mobile">企业客服电话：</em><a href="tel:<?php echo $model->mobile ?>"><?php echo $model->mobile; ?></a></li><?php endif;?>
 			<?php if(!empty($model->email)):?><li class="nb"><em class="email">企业邮箱：</em><a href="mailto:<?php echo $model->email?>"><?php echo $model->email?></a></li><?php endif;?>
 			<?php if(!empty($model->address)):?><li class="nb"><em class="address">企业地址：</em><a href="http://api.map.baidu.com/geocoder?address=<?php echo $model->address; ?>&output=html"><?php echo $model->address;?></a></li><?php endif;?>
 			<?php if(!empty($model->weixin)):?><li class="ny"><em class="ot">微信公众号：</em><?php echo $model->weixin;?></li><?php endif;?>

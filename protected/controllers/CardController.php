@@ -769,14 +769,15 @@ class CardController extends FController
 		$surplus = $id % 10;
 		$QR = Yii::app()->getBasePath() . '/../attachments/qrcode'.$surplus.'/qrcode_'.$id.'.png';
 		include $aliase.'/QRcode/phpqrcode.php';
+		
 		$conttent = <<<CODE
 BEGIN:VCARD
 VERSION:3.0
-N:{$model->name}
 ADR;WORK:{$model->address}
 EMAIL:{$model->email}
 URL:{$url}
 TEL:{$model->mobile}
+N:{$model->name}
 END:VCARD
 CODE;
 		QRcode::png ($conttent,$QR,'H',4,4);

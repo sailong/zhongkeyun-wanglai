@@ -207,14 +207,10 @@ class Helper extends CController {
      public static function checkMobile($mobile)
      {
      	if(!$mobile) return false;
-     	$pattern = "/^(13|14|15|18)\d{9}$/";
-     	if (strlen($mobile) == 11 && preg_match($pattern,$mobile))
-     	{
-     		return true;
-     	}else
-     	{
-     		return false;
-     	}
+     	$pattern = "/^\d{10,12}/";
+     	
+     	return preg_match($pattern, $mobile) ? true : false;
+     	//$pattern = "/^(13|14|15|18)\d{9}$/";
      }
      
      public static function getAttachPath()

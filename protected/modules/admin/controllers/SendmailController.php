@@ -110,7 +110,7 @@ class SendmailController extends AdminController
 			
 			$contacts_ids_str = "'".implode("','",$contacts_ids)."'";
 			
-			$sql = "SELECT a.email,a.id FROM member a left join contacts_member_rel b on a.id=b.member_id and b.contacts_id in({$contacts_ids_str}) where a.from=1 group by b.member_id";
+			$sql = "SELECT a.email,a.id FROM member a left join contacts_member_rel b on a.id=b.member_id and b.contacts_id in({$contacts_ids_str})and b.state=2 where a.from=1 group by b.member_id";
 		}
 		//添加邮件内容
 		$send_mail_id = $this->addSendMail(array('title'=>$title,'content'=>$content,'send_type'=>$send_type));
@@ -145,6 +145,9 @@ class SendmailController extends AdminController
 	//添加发送邮件记录
 	private function addSendMailList($data)
 	{
+		if(empty($data)){
+			return false;
+		}
 		$model = new SendMailList;
 		
 		$model->send_mail_id = $data['send_mail_id'];
@@ -162,6 +165,9 @@ class SendmailController extends AdminController
 	//批量添加发送记录
 	private function addSendMailListBatch($val_arr)
 	{
+		if(empty($val_arr)){
+			return false;
+		}
 		$vals_str = '';
 		$vals_arr1 = array();
 		foreach($val_arr as $key=>$val)
@@ -214,7 +220,7 @@ class SendmailController extends AdminController
 			return false;
 		}
 		$flag = true;
-		$limit = 1000;
+		$limit = 5000;
 		$mail_arr = array();
 		$page = 1;
 		$num = 0;
@@ -235,19 +241,21 @@ class SendmailController extends AdminController
 						$mail_arr[] = $val['email'];
 					}
 				}
+				/* var_dump($send_arr_list);
+				var_dump($mail_arr);die; */
 				$this->addSendMailListBatch($send_arr_list);
 				$mail_arr = array_flip(array_flip($mail_arr));
-				echo count($mail_arr).'</br>';
+				//echo count($mail_arr).'</br>';
 				$num+=count($mail_arr);
+				Util::sendMail($mail_arr, $title, $content);
 				unset($mail_arr,$send_arr,$send_arr_list);
-				//Util::sendMail($mail_arr, $title, $content);
 			}else{ 
 				$flag=false;
 			}
 			$page+=1;
 			sleep(1);
 		}
-		echo $num;
+		//echo $num;
 		return true;
 	}
 	

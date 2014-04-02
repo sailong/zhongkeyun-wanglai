@@ -1,18 +1,77 @@
 <?php
-class ViewController extends Controller
+class ViewController extends CController
 {
+	protected $_member = null;     //已登录用户model
+    
 	
-    public function actionIndex()
+	public function init()
+	{
+		// 		$this->_debug = Yii::app()->request->getParam('debug',false);
+		// 		if(!$this->_debug)
+			// 		{
+			// 			if(!Yii::app()->mobileDetect->isMobile())
+				// 			{
+				// 				$this->renderPartial('/layouts/deny');
+				// 				Yii::app()->end();
+				// 			}
+				// 		}
+	
+	
+				// 当前处于登录状态下的用户,需要先login
+				
+	Yii::log('begin init');
+	
+	 $Uid = Yii::app()->user->id;
+	
+	Yii::log('userId'.$Uid);
+	
+		
+				if(Yii::app()->user->getIsGuest())
+				{
+					$openid = Yii::app()->request->cookies->itemAt('openid')->value;
+					
+					Yii::log('is a GUest');
+					
+					Yii::log('openid is' . $openid);
+					if(!empty($openid))
+					{
+						$user = Member::model()->findByAttributes(array('weixin_openid'=>$openid));
+						if(!empty($user))
+						{
+							Yii::log('user exist uid' . $user->id);
+							$this->login($user);
+						}else
+						{
+							Yii::app()->request->cookies->remove('openid');
+						}
+					}
+				}
+		Yii::log('init over');
+				
+	
+	}
+	
+	public function actionIndex()
     {   
+    	
     	//$this->render('index');
     }
     
     public function actionTest()
     {
     	
+    	var_dump(Helper::checkMobile(11742343332));
+    	
+    	die;
+    	
+    	echo 'This is a test';
+    	Yii::app()->end();
+    	
+    	
     	$useragent = $_SERVER['HTTP_USER_AGENT'];
     	
     	Yii::log($useragent);
+    	
     	Yii::app()->end();
     	echo $useragent;
     	die;
@@ -152,6 +211,18 @@ class ViewController extends Controller
 			}
 			
 		}
+    }
+    
+    public function actionApi()
+    {
+    	//$url = 'http://www.tongdaohui.com//wanglai/activityList/d2FuZ2xhaTp3YW5nbGFpMTIzNDU2/15';
+    	
+    	$url = 'http://www.tongdaohui.com//wanglai/activityDetail/d2FuZ2xhaTp3YW5nbGFpMTIzNDU2/1358';
+    	//$url = 'http://www.tongdaohui.com//wanglai/activityDetail/d2FuZ2xhaTp3YW5nbGFpMTIzNDU2/1335';
+    	$list = file_get_contents($url);
+    	
+    	$data = json_decode($list, true);
+    	print_r($data);
     }
     
     /**

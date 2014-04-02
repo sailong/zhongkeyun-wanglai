@@ -84,10 +84,14 @@ class ContactsMember extends CActiveRecord
 	{
 		return array(
 			'pass' => array(
-				'condition' => "state=".self::STATE_PASS		
+				'alias' => 'cm',
+				'condition' => "state=".self::STATE_PASS,
+				'order' => 'cm.id desc'	
 			),
 			'applying' => array(
-				'condition' => "state=".self::STATE_APPLY		
+				'alias' => 'cm',
+				'condition' => "state=".self::STATE_APPLY,
+				'order' => 'cm.id desc'
 			),
 			'joined' => array(
 				'condition' => "state=".self::STATE_PASS." AND member_id='".Yii::app()->user->id."'"

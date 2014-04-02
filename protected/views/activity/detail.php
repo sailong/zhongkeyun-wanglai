@@ -1,5 +1,6 @@
 <?php echo $this->renderPartial('/common/header',array('title'=>'活动详情'));?>
 
+<?php $cooperator = $model->source == Activity::SOURCE_SELE ? false : true;?>
 <div id="content">
 	<div id="actinfo">
 	<?php if(Yii::app()->user->hasFlash('apply')):?>
@@ -34,7 +35,13 @@ EOF;
 		  </tr>
 		  <tr>
 			<td class="tdtit">地&nbsp;&nbsp;&nbsp;&nbsp;点：</td>
-			<td><?php echo $model->provinceName->name; ?> <?php echo $model->areaName->name; ?> <?php echo $model->district; ?></td>
+			<td>
+			<?php if($cooperator && !empty($model->districe)):?>
+				<?php echo $model->district; ?>
+			<?php else:?>
+				<?php echo $model->provinceName->name; ?> <?php echo $model->areaName->name; ?> 
+			<?php endif;?>
+			</td>
 		  </tr>
 		  <tr>
 			<td class="tdtit">已报名：</td>
@@ -54,6 +61,13 @@ EOF;
 			<td class="tdtit">转&nbsp;&nbsp;&nbsp;&nbsp;发：</td>
 			<td id="sharesCount"><?php echo $model->shares; ?></td>
 		  </tr>
+		  <?php if(!empty($model->cost)):?>
+		   <tr>
+			<td class="tdtit">活动费用：</td>
+			<td id="sharesCount"><?php echo $model->cost; ?></td>
+		  </tr>
+		  
+		  <?php endif;?>
 		</table>
 		<div id="actcontent">
 			<h1>活动介绍</h1>
@@ -71,7 +85,26 @@ EOF;
 			 			}
 			 		echo preg_replace("/width:\d+px;?|height:\d+px;?|width=\"\d+\"|height=\"\d+\"/i",'', $details);
 				?>
+				<?php if(!empty($model->videoUrl)):?>
+					<iframe src="<?php echo $model->videoUrl;?>" border="0" frameborder="no" scrolling="no" allowtransparency="true" width="100%" height="510"></iframe>
+				<?php endif;?>
+				
 			</div>
+			<?php 
+				if($cooperator)
+				{
+					$extra = unserialize($model->cooperator->extra);
+					if(!empty($extra['process']))
+					{
+						echo '<h1>活动流程</h1>';
+						echo '<div class="actcon">';
+						echo $extra['process'].
+							'</div>';
+					}
+				}
+				
+			?>
+			
 		</div>
 	</div>
 	<section class="btngroup">

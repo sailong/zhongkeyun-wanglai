@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<meta content="telephone=no" name="format-detection" />
 	<title>往来</title>
-	<link rel="stylesheet" href="/static/css/wanglai.css?version=20140306444" />
+	<link rel="stylesheet" href="/static/css/wanglai.css?version=20231303235677" />
 	<script src="/static/js/wanglai.js?version=2014022221"></script>
 </head>
 <body>

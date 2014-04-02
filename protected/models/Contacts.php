@@ -138,4 +138,29 @@ class Contacts extends CActiveRecord
 		);
 	}
 
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 */
+	public function search()
+	{
+		$criteria=new CDbCriteria;
+		$criteria->compare('title',$this->title,true);
+		return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+				'sort' => array(
+						'defaultOrder' => 'id desc',
+						'attributes' => array('id')
+				)
+		));
+	}
+	/**
+	 * 统计某用户创建群的数量
+	 */
+	public function calculateCreated($mid)
+	{
+		$sql = "SELECT count(*) FROM ".$this->tableName()." WHERE create_mid={$mid}";
+		return Yii::app()->db->createCommand($sql)->queryScalar();
+	}
+	
 }

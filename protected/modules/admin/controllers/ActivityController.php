@@ -172,6 +172,10 @@ class ActivityController extends AdminController
 		}
 		if($post['begin_time'])  $post['begin_time'] = strtotime($post['begin_time']); 
 		if($post['end_time'])    $post['end_time'] = strtotime($post['end_time']);
+		if(empty($post['max']))
+			$post['max'] = 0;
+		else 
+			$post['max'] = intval($post['max']);
 		//var_dump($post);die;
 		$model->attributes = $post;
 		//var_dump($post['state']);die;
@@ -261,6 +265,48 @@ class ActivityController extends AdminController
 		}
 		echo json_encode($data);
 		exit();
+	}
+	
+	/**
+	 * 代报名活动
+	 */
+	public function actionApply()
+	{
+		$activity_id = Yii::app()->request->getParam('id');
+		$model = Activity::model()->findByPk($activity_id);
+		if(isset($_POST['Members']))
+		{
+			$members = $_POST['Members'];
+			$errors = array();
+			if(!empty($members))
+			{
+				foreach ($members as $member)
+				{
+					if(!empty($member))
+					{
+						$member_id = 0;
+						preg_match('/^(.*)\(.*id:(\d+)/', $member,$match);
+						$name = $match[1];
+						if(!empty($match[2]))
+						{
+							$member_id = $match[2];
+						}else{
+							$this->showMessage('请不要更改用户的内容!');
+						}
+						$result = Activity::model()->apply($activity_id, $member_id);
+						if($result['status'] == 0)
+						{
+							$errors[] = $name . ' 报名失败';
+						}
+					}
+					$msg = !empty($errors) ? join(';', $errors) : '报名成功';
+					Yii::app()->user->setFlash('apply', $msg);
+				}
+			}
+		}
+		
+		$this->render('apply',array('model'=>$model));
+		
 	}
 
 }

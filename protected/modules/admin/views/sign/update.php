@@ -5,7 +5,7 @@
 			<h3><?php echo $this->nav;?>&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo $this->createUrl('index');?>">返回列表</a></h3>
 		</div>
 		<div class="content-box-content">
-			<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+			<?php echo $this->renderPartial('_form', array('model'=>$model,'create_mids'=>$create_mids)); ?>
 		</div>
 	</div>
 </div>

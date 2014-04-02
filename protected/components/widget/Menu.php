@@ -19,6 +19,16 @@ class Menu extends CWidget
 			'actionId' => 'index'	
 		),
 		array(
+			'title' => '发文章',
+			'controllerId' => 'article',
+			'actionId' => 'home'
+		),
+        array(
+                'title' => '发起签名',
+                'controllerId' => 'sign',
+                'actionId' => 'index'
+        ),
+		array(
 			'title' => '微名片',
 			'children' => array(
 				array(

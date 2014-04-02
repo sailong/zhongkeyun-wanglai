@@ -103,7 +103,8 @@ $(function(){
 	}
 	dataForWeixin.url = "<?php echo $this->createUrl('member/view',array('id'=>$model->id,'#'=>'mp.weixin.qq.com'));?>";
 	dataForWeixin.title = '<?php echo $model->name;?>的微名片';
-	dataForWeixin.desc = '<?php echo $model->name;?>的微名片,保存在微信上并可发送给朋友或分享到朋友圈、微信群！';
+	dataForWeixin.desc = '职位：<?php echo $model->position ;?>\x0a'+
+							'公司：<?php echo $model->company;?>';
 	dataForWeixin.weibodesc = '#微名片#，这是<?php echo $model->name;?>的微名片，请大家惠存，你也来制作自己的微名片吧！';
 	dataForWeixin.MsgImg = "<?php echo $photo; ?>";
 

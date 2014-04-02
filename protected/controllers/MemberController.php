@@ -114,13 +114,13 @@ class MemberController extends FrontController
 		$conttent = <<<CODE
 BEGIN:VCARD
 VERSION:3.0
-N:{$model->name}
 ADR;WORK:{$model->address}
 EMAIL:{$model->email}
 URL:{$url}
 TEL:{$model->mobile}
 ORG:{$model->company}
 TITLE:{$position}  
+N:{$model->name}
 END:VCARD
 CODE;
 		QRcode::png ($conttent,$QR,'H',4,4);

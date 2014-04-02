@@ -25,19 +25,25 @@ class Activity extends CActiveRecord
 	const VERIFY_STATE_DELETED = 4; 
 	
 	/**
+	 * 合作活动(2 同道会)
+	 * @var unknown
+	 */
+	const SOURCE_SELE = 1;
+	const SOURCE_TONGDAOHUI = 2;
+	
+	/**
 	 * 临时,需要填写调查问卷的活动id
 	 * @var unknown_type
 	 */
-	public static $special_id = 63;
+	public static $special_id = 101025;
 	
 	/**
 	 * 临时,需要发送多个邮件的邮箱
 	 * @var unknown_type
 	 */
-	//public static $emails = array('981100088@qq.com','fanhui@zibolan.com');
+	public static $emails = array('981100088@qq.com','fanhui@zibolan.com');
 	
-	public static $emails = array('573932979@qq.com','zhoujianjun@zhongkeyun.com');
-	
+	//public static $emails = array('573932979@qq.com','zhoujianjun@zhongkeyun.com');
 	
 	/**
 	 * 活动类型,暂时比较少,没存数据库
@@ -55,13 +61,14 @@ class Activity extends CActiveRecord
 	public function rules()
 	{
 		return array(
-			array('title,create_mid,province,begin_time,end_time,detail,create_time,state,verify','required'),
+			array('title,province,begin_time,end_time,detail,create_time,state,verify','required'),
 			array('title','length', 'max'=>100),
 			array('district','length','max' =>200),
 			array('begin_time','compare','compareAttribute'=>'end_time','operator'=>'<=','message'=>'开始时间必须小于结束时间','on' => 'front'),
 			array('end_time','compare','operator'=>'>=','compareValue'=>strtotime(date('Y-m-d',time())),'message'=>'结束时间必须大于当前时间','on' => 'front'),
 			array('province,area,state,verify,max','numerical', 'integerOnly'=>true),
-			array('detail','length','max'=>8000)	
+			array('detail','length','max'=>8000),
+			array('update_time,soure,cost,videoUrl,create_mid','safe')	
 		);
 	}
 	
@@ -95,6 +102,15 @@ class Activity extends CActiveRecord
 			'applicants' => array(self::MANY_MANY, 'Member', 'activity_member_rel(activity_id,member_id)'),
 			'provinceName'   => array(self::BELONGS_TO, 'District', 'province'),
 			'areaName'		 => array(self::BELONGS_TO, 'District', 'area'),
+			'cooperator'  => array(self::HAS_ONE, 'ActivityMigrate', 'activity_id')
+		);
+	}
+	
+	public function defaultScope()
+	{
+		return array(
+			'alias' => 'a',
+			'condition' => 'a.state='.self::VERIFY_STATE_WITHOUT.' or a.state='.self::VERIFY_STATE_PASS
 		);
 	}
 	
@@ -147,6 +163,7 @@ class Activity extends CActiveRecord
 			'verify'	  => '是否需要审核',
 			'create_time' => '创建时间',
 			'update_time' => '编辑时间',
+			'source'      => '平台'
 		);
 	}
 	
@@ -240,22 +257,27 @@ class Activity extends CActiveRecord
 					$activityMember->create_time = time();
 				}else{
 					$activityMember->canceled = ActivityMember::CANCELED_NO;
+					$activityMember->create_time = time();
 				}
 				if($activityMember->save())
 				{
-					$follow = Follow::model()->findByAttributes(array('mid'=>$mid,'follow_mid'=>$model->create_mid));
-					if(!empty($follow))
+					if($model->source == self::SOURCE_SELE)
 					{
-						if($follow->is_deleted == Follow::FOLLOW_OUT)
-							$follow->is_deleted = Follow::FOLLOW_IN;
-					}else {
-						$follow = new Follow();
-						$follow->mid = $mid;
-						$follow->follow_mid = $model->create_mid;
-						$follow->follow_at  = time();
-						$follow->is_new = Follow::NEW_YES;
+						$follow = Follow::model()->findByAttributes(array('mid'=>$mid,'follow_mid'=>$model->create_mid));
+						if(!empty($follow))
+						{
+							if($follow->is_deleted == Follow::FOLLOW_OUT)
+								$follow->is_deleted = Follow::FOLLOW_IN;
+						}else {
+							$follow = new Follow();
+							$follow->mid = $mid;
+							$follow->follow_mid = $model->create_mid;
+							$follow->follow_at  = time();
+							$follow->is_new = Follow::NEW_YES;
+						}
+						$follow->save();
+						return array('status' => 1, 'msg' => '报名成功');
 					}
-					$follow->save();
 					return array('status' => 1, 'msg' => '报名成功');
 				}
 			}
@@ -290,4 +312,34 @@ class Activity extends CActiveRecord
 		return Yii::app()->db->createCommand($sql)->queryScalar();
 	}
 	
+	/**
+	 * 检测第三方活动报名要求
+	 * @param Activity $model 活动对象
+	 * @param Member $member  当前登录用户对象
+ 	 */
+	public function checkCooperatApply(&$model,$member)
+	{
+		if($model->source == self::SOURCE_TONGDAOHUI)
+		{
+			// 有没自定义要求字段
+			$a = unserialize($model->cooperator);
+			$applyFields = $a['apply_field'];
+			if(!empty($applyFields))
+			{
+				$fields = array('company','position','email');
+				foreach ($applyFields as $value)
+				{
+					if($value['must'] == 1)
+					{
+						$name = $value['name'];
+						if(in_array($name, $fields) && empty($member->{$name}))
+						{
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
 }

@@ -68,6 +68,7 @@ class AdminController extends CController
     	//$menu[]=array('id'=>'Code/index','name'=>'查询验证码');
     	$menu[]=array('id'=>'Contacts/index','name'=>'微群');
     	$menu[]=array('id'=>'Sign/index','name'=>'签名');
+    	$menu[]=array('id'=>'Article/index','name'=>'文章管理');
     	$menu[]=array('id'=>'Sendmail/index','name'=>'发送邮件');
     	
     	//$menu[]=array('id'=>'User','name'=>'系统用户管理');

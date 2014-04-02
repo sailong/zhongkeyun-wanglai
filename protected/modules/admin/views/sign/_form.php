@@ -51,6 +51,34 @@
 				<?php echo $form->error($model,'title'); ?>		
 			</td>
 		</tr>
+		<tr>
+			<td width="10%">
+				<label><span class="required">*</span>发布人</label>
+			</td>
+			<td>
+				<?php 
+					$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+							'name'=>'publish_uids',
+							'sourceUrl' => $this->createUrl('/admin/sign/GetCreater'),
+                            'value'=>$create_mids,
+							//'source'=>array('ac1', 'ac2', 'ac3'),
+							// additional javascript options for the autocomplete plugin
+							'options'=>array(
+								'minLength'=>'2',
+								
+							),
+							'htmlOptions'=>array(
+								'style'=>'height:20px;',
+								'size' => 100
+							),
+					));
+			
+				?>				
+			</td>
+			<td width="30%">
+						
+			</td>
+		</tr>
 		
 		<tr>
 			<td width="10%"><?php echo $form->labelEx($model,'content'); ?></td>

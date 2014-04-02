@@ -9,12 +9,14 @@
 							<thead>
 								<tr>
 								   <th width="5%">ID</th>
-								   <th width="10%">活动标题</th>
-								   <th width="40%">活动内容</th>
-								   <th width="10%">活动链接</th>
+								   <th width="10%">签名标题</th>
+								   <th width="8%">创建人</th>
+								   <th width="25%">签名内容</th>
+								   <th width="10%">签名链接</th>
 								   <th width="10%">签名人数</th>
-								    <th width="8%">PV</th>
-								   <td width="10%">创建时间</td>
+								   <th width="8%">PV</th>
+								   <th width="8%">分享数</th>
+								   <th width="10%">创建时间</th>
 								   <th>操作</th>
 								</tr>
 							</thead>
@@ -29,11 +31,13 @@
 									{
 										echo '<tr>';
 										echo '<td>' . $row->id . '</td>';
-										echo '<td>' . $row->title.'</td>';
-										echo '<td>' . mb_substr(strip_tags($row->content),0,50,'UTF-8').'</td>';
-										echo '<td><a href="' . $this->createAbsoluteUrl('/signature/index',array('id'=>Util::encode($row->id))) . '">链接</a></td>';
+										echo '<td><div width="100%" style="word-break:break-all;">' . $row->title.'</div></td>';
+										echo '<td><div width="100%" style="word-break:break-all;">' . $row->creater->name.'</div></td>';
+										echo '<td><div width="100%" style="word-break:break-all;">' . mb_substr(strip_tags($row->content),0,50,'UTF-8').'</div></td>';
+										echo '<td><a href="' . $this->createAbsoluteUrl('/sign/view',array('id'=>Util::encode($row->id))) . '">链接</a></td>';
 										echo '<td>' . SignActivity::model()->calculateTotal($row->id).'</td>';
 										echo '<td>' . $row->pv_counts . '</td>';
+										echo '<td>' . $row->share_counts . '</td>';
 										echo '<td>'. date('Y-m-d H:i:s', $row->create_time).'</td>';
 										echo '<td>
 								   			<a href="'.$this->createUrl('update', array('id'=>$row->id)).'">修改</a>';

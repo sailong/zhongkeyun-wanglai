@@ -146,6 +146,14 @@ class AR_Member extends CActiveRecord
 		);
 	}
 
+	public function defaultScope()
+	{
+		return array(
+			'condition' => '`from`=1'	
+		);
+	}
+	
+	
 	public function scopes()
 	{
 		return array(
@@ -296,5 +304,30 @@ class AR_Member extends CActiveRecord
 			}
 		}
 		return $count>0 ? $count-1 : 0;
+	}
+	
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 */
+	public function search()
+	{
+
+		$criteria=new CDbCriteria;
+		$criteria->with = 'stat';
+		$criteria->alias = 'm';
+		
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('mobile',$this->mobile,true);
+		$criteria->compare('wanglai_number',$this->wanglai_number,true);
+		
+	
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+			'sort' => array(
+				'defaultOrder' => 'm.id desc',
+				'attributes' => array('id','wanglai_number','views','stat.pv_counts')
+			)
+		));
 	}
 }

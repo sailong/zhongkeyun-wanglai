@@ -97,7 +97,7 @@ class BlessController extends FrontController
 	public function actionIndex()
 	{
 		$category = Card::model()->category;
-		unset($category[1],$category[2],$category[3]);
+		unset($category[1],$category[2],$category[3],$category[6],$category[7]);
 		Util::addCookie('step', 'first');
 		$this->onBeforeIndex(new CEvent());
 		$this->render('index',array('category'=>$category));

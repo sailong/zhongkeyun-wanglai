@@ -25,7 +25,7 @@ class WeixinController extends CController
 	 * 验证消息的合法性
 	 * @see CController::beforeAction()
 	 */
-	protected function beforeAction()
+	protected function beforeAction($action)
 	{
 		$echoStr = Yii::app()->request->getParam('echostr','');
 		if(!empty($echoStr))

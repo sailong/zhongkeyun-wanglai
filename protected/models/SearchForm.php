@@ -6,7 +6,6 @@ class SearchForm extends CFormModel
     public $status;
     public $wanglai_number;
     public $activity_create;
-    public $send_type;
 
     public function rules()
     {
@@ -22,7 +21,6 @@ class SearchForm extends CFormModel
         	'status' => 'status',
         	'wanglai_number' => 'wanglai_number',
         	'activity_create'=>'activity_create',
-            'send_type'=>'send_type',
         );
     }
 }

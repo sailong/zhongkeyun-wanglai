@@ -196,13 +196,16 @@ class AR_Follow extends CActiveRecord
 	public function checkMultiFollow2($mid, $follow_mids)
 	{
 		$result = array_fill_keys($follow_mids, false);
-		$sql = "SELECT * FROM follow WHERE `mid`={$mid} AND `follow_mid` IN(".join(',',$follow_mids).")";
-		$all = Yii::app()->db->createCommand($sql)->queryAll();
-		if(!empty($all))
+		if(!empty($follow_mids))
 		{
-			foreach ($all as $follow)
+			$sql = "SELECT * FROM follow WHERE `mid`={$mid} AND `follow_mid` IN(".join(',',$follow_mids).")";
+			$all = Yii::app()->db->createCommand($sql)->queryAll();
+			if(!empty($all))
 			{
-				if($follow['is_deleted'] == self::FOLLOW_IN) $result[$follow['follow_mid']] = true;
+				foreach ($all as $follow)
+				{
+					if($follow['is_deleted'] == self::FOLLOW_IN) $result[$follow['follow_mid']] = true;
+				}
 			}
 		}
 		return $result;
@@ -238,4 +241,5 @@ class AR_Follow extends CActiveRecord
 		$sql = "SELECT member.name FROM follow INNER JOIN follow AS f ON follow.follow_mid=f.mid INNER JOIN member ON f.mid=member.id AND follow.mid={$mid} AND follow.is_deleted=".self::FOLLOW_IN." AND f.follow_mid={$mid} AND f.is_deleted=".self::FOLLOW_IN." ORDER BY follow.follow_at DESC LIMIT 1";
 		return Yii::app()->db->createCommand($sql)->queryScalar();
 	}
+	
 }

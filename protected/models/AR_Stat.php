@@ -57,6 +57,7 @@ class AR_Stat extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'member'=>array(self::BELONGS_TO, 'Member', 'member_id')
 		);
 	}
 

@@ -295,6 +295,11 @@ class ActivityController extends FrontController
 					$this->returnData(0, '报名人数已满了');
 				}
 			}
+			// 第三方报名要求
+			if(!Activity::model()->checkCooperatApply($model, $this->_member))
+			{
+				$this->returnData(0,'请修改名片信息,确保邮箱,职位,公司信息不为空方可报名');
+			}
 			$activityMember = ActivityMember::model()->findByAttributes(array('activity_id'=>$id,'member_id'=>$uid));
 			if(empty($activityMember))
 			{
@@ -308,10 +313,11 @@ class ActivityController extends FrontController
 					$this->returnData(0, '您已经报名过了哦！');
 				}
 				$activityMember->canceled = ActivityMember::CANCELED_NO;
+				$activityMember->create_time = time(); //更改报名时间
 			}
 			$activityMember->state = $model->verify == Activity::APPLY_VIRIFY_WITH ? ActivityMember::VERIFY_STATE_APPLY : ActivityMember::VERIFY_STATE_WITHOUT;
 			$activityMember->save();
-			$this->onAfterApply(new CEvent($this,array('model'=>$model)));
+			$this->onAfterApply(new CEvent($this,array('model'=>$model,'member'=>$this->_member)));
 			$message = $model->verify == Activity::APPLY_VIRIFY_WITH ? '报名成功,等待审核' : '报名成功';
 			$this->returnData(1, $message, $activityMember->id);
 		}
@@ -329,9 +335,21 @@ class ActivityController extends FrontController
 	{
 		$id = intval(Yii::app()->request->getParam('id'));
 		if(ActivityMember::model()->cancle($id))
+		{
+			$this->onAfterCancel(new CEvent($this,array('applyId'=>$id,'member'=>$this->_member)));
 			$this->returnData(1,'取消成功');
+		}
 		else
 			$this->returnData(0,'失败');
+	}
+	
+	/**
+	 * 取消后同步取消合作方的活动报名
+	 * @param unknown $event
+	 */
+	public function onAfterCancel($event)
+	{
+		$this->raiseEvent('onAfterCancel', $event);
 	}
 	
 	/**
@@ -462,7 +480,7 @@ class ActivityController extends FrontController
 		$model=Activity::model()->with(array('provinceName','areaName'))->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
-		if($model->state == Activity::VERIFY_STATE_REFUSED)
+		if($model->state == Activity::VERIFY_STATE_REFUSED || $model->state == Activity::VERIFY_STATE_DELETED)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}

@@ -227,4 +227,67 @@ class FrontController extends CController
 	{
 		return $this->_member;
 	}
+	
+	/**
+	 * 方案一
+	 * 防止表单重复提交
+	 */
+	public function autoCheckFormSubmit(){
+	    $session = Yii::app()->session;
+	    $user_id = Yii::app()->user->id;
+	    $sessionKey = $user_id.'_is_sending';
+	    
+	    if(isset($session[$sessionKey])){
+	        $first_submit_time = $session[$sessionKey];
+	        $current_time = time();
+	        if($current_time - $first_submit_time < 20){
+	            $session[$sessionKey] = $current_time;
+	            return false;//$this->response(array('status'=>1, 'msg'=>'不能在10秒钟内连续发送两次。'));
+	        }else{
+	            unset($session[$sessionKey]);//超过限制时间，释放session";
+	        }
+	    }
+	    //第一次点击确认按钮时执行
+	    if(!isset($session[$sessionKey])){
+	        $session[$sessionKey] = time();
+	    }
+	    
+	    return true;
+	}
+	
+	/**
+	 * 方案二
+	 * 1、产生token，并存在session中
+	 * 2、随页面生成
+	 * 3、提交页面与session进行比对，成功后对session进行销毁
+	 * 4、第二次提交则不存在这个值而报错
+	 * @param type $uniqueid
+	 * @return type
+	 */
+	public function createToken($uniqueid) 
+	{
+	    $session = Yii::app()->session;
+	    if(is_object($uniqueid))
+	    {
+	        $uniqueid = $uniqueid->id.$uniqueid->action->id.Yii::app()->user->id;
+	    }else{
+	        $uniqueid = empty($uniqueid) ? Yii::app()->user->id . uniqid(): $uniqueid;
+	    }
+	    $token = md5("wang_lai" . $uniqueid);
+	    $session["form_token"] = $token; 
+	  
+	    return $token;
+	}
+	
+	public function checkToken($token) 
+	{
+	    $session = Yii::app()->session;
+    	if (!isset($session['form_token']) || empty($session['form_token']) || $session['form_token'] != $token) 
+    	{
+	        return false;
+    	} else {
+    	    unset($session['form_token']);
+    	    return true;
+    	}
+	}
 }

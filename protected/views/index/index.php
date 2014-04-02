@@ -12,6 +12,32 @@
 		</span>
 	</a>
 </section>
+<section class="se3 fix">
+	<a href="<?php echo $this->createUrl('contacts/myCreated'); ?>">
+		<span class="hd">微群通讯录</span>
+		<span class="bd">
+			<span class="p1">我的通讯录</span>
+			<span class="p2">让你和你的小伙伴时刻保持联系</span>
+		</span>
+	</a>
+</section>
+<section class="se4 fix">
+    <a href="<?php echo $this->createUrl('article/home');?>" class="a1">
+		<span class="hd">发表文章</span> 
+		<span class="bd">
+			<span class="p1">文章</span>
+			<span class="p2">更醒目、个性化地展示您的大作，更显大气、更易传播、更好互动。</span>
+		</span>
+	</a>
+	<a href="<?php echo $this->createUrl('sign/index');?>" class="a2">
+		<span class="hd">发起签名</span>
+		<span class="bd">
+			<span class="p1">签名</span>
+			<span class="p2">更醒目、个性化地展示您的大作，更显大气、更易传播、更好互动。</span>
+		</span>
+	</a>
+</section>
+
 <section class="se2 fix">
 	<a href="<?php echo $this->createUrl('activity/myCreated'); ?>" class="a1">
 		<span class="hd">微活动</span>
@@ -28,15 +54,9 @@
 		</span>
 	</a>
 </section>
-<section class="se3 fix">
-	<a href="<?php echo $this->createUrl('contacts/myCreated'); ?>">
-		<span class="hd">微群通讯录</span>
-		<span class="bd">
-			<span class="p1">我的通讯录</span>
-			<span class="p2">让你和你的小伙伴时刻保持联系</span>
-		</span>
-	</a>
-</section>
+
+
+
 <footer id="ifooter" class="fix">
 	<p><a href="<?php echo Yii::app()->createUrl('/site');?>">登录企业号</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo Yii::app()->createUrl('/site/logout');?>">退出登录</a>
 	<p>欢迎关注往来微信公众号：wanglairm</p>
